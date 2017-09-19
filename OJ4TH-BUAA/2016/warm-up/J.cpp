@@ -2,12 +2,11 @@
 #include <cmath>
 #include <algorithm>
 using namespace std;
-
+/**
+´óË®Ìâ¡£¡£
+*/
 int money;
-void cont(int rate,int num)
-{
 
-}
 int main()
 {
     int cnt[6];
