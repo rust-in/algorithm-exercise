@@ -26,6 +26,7 @@ void pt(long num)
         {
             cout << "2("; pt(b); cout<<")";
         }
+
         num-=a;
     }
 }
