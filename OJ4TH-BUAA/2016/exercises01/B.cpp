@@ -32,7 +32,7 @@ int main()
             if(length%2)
                 printf("%.1lf\n", (double)num[length/2]);
             else
-                printf("%.1lf\n", (double)((num[length/2-1]+num[length/2])/2));
+                printf("%.1lf\n", ((double)num[length/2-1]+num[length/2])/2);
         }
     }
 }
