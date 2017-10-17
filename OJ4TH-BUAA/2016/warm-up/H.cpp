@@ -15,6 +15,7 @@ struct cmp{
 int main()
 {
     priority_queue<int,vector<int>,cmp> que;
+//    priority_queue<int,vector<int>,greater<int>> que;
     int len;
     while(cin>>len){
         for(int i=0;i<len;i++){

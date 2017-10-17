@@ -2,7 +2,8 @@
 #include <climits>
 using namespace std;
 /**
-�鲢����
+求逆序对
+也就是归并排序
 */
 int num[100000];
 long long ans;

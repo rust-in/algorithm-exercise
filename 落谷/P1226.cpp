@@ -3,7 +3,8 @@
 using namespace std;
 
 /**
-������ȡģ
+输入b，p，k的值，求b^p mod k的值。其中b，p，k*k为长整型数。
+快速幂
 */
 
 int quickMod(int a,int b,int c)
