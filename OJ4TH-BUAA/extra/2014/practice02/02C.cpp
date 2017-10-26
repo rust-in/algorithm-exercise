@@ -6,6 +6,7 @@ int pot[505][505];
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
     int len,time;
     while(cin>>len>>time){
         for(int i=0;i<len;i++){
