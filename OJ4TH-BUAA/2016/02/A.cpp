@@ -1,11 +1,5 @@
-#include <iostream>
 #include <cstdio>
-#include <string>
-#include <cstring>
 #include <algorithm>
-#include <queue>
-#include <iomanip>
-
 using namespace std;
 long font[50005];
 long last[50005];
@@ -22,16 +16,13 @@ int main()
         sort(font,font+len);
         sort(last,last+len);
         int i,j,u=1,cnt=0;
-        for(i=0;i<len;i++){
-            for(j = max(u,i+1);j<len;j++){
+        for(i=0;i<len;i++)
+            for(j = u;j<len;j++)
                 if(last[i] < font[j]){
                     cnt += len - j;
                     u = j;
                     break;
                 }
-            }
-        }
-
         printf("%d\n",cnt);
     }
 }

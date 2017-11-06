@@ -1,39 +1,52 @@
-#include <iostream>
 #include <cstdio>
-#include <string>
-#include <cstring>
-#include <algorithm>
-#include <queue>
-#include <iomanip>
-#include <map>
+#include<iostream>
+#include<algorithm>
+#include<queue>
+#include<vector>
 using namespace std;
 
-long one[100005];
-long two[100005];
+int main(){
+    int n;
+    while(cin >> n){
+        int key;
+        bool flag = false;
+        vector<int> one(n), two(n), arr3(n);
+        vector<bool> res(n, false);
 
-int main()
-{
-    long len,t;
-    while(~scanf("%ld",&len)){
-        map<int,int> abc;
-        for(int i=0;i<len;i++)  scanf("%ld", &one[i]);
-        for(int i=0;i<len;i++)  scanf("%ld", &two[i]);
-        scanf("%ld",&t);
-        sort(one,one+len);
-        sort(two,two+len);
-
-        int nt=0;   long tmpa = one[0],tmpb = two[0];
-        for(int i=0;i<len;i++){
-            abc[two[i]]++;
+        for(int i = 0; i < n; i++){
+            scanf("%d", &one[i]);
         }
-        for(int i=0;i<len;i++){
-            if(abc[t-one[i]]){
-                printf("%d %d",one[i],t-one[i]);
-                abc[t-one[i]]=0;
-                nt=1;
+        for(int i = 0; i < n; i++)
+            scanf("%d", &two[i]);
+        scanf("%d", &key);
+
+        sort(one.begin(), one.end());
+        sort(two.begin(), two.end());
+
+        for(int i = 0; i < n; i++)
+            arr3[i] = key - one[i];
+        for(int i = 0; i < n; i++){
+            if(binary_search(two.begin(), two.end(), arr3[i])){
+                res[i] = true;
+                flag = true;
             }
         }
-        if(nt==0)printf("OTZ\n");
-        printf("\n");
+
+        if(flag){
+            double curr = -1e9;
+            for(int i = 0; i < n; i++){
+                if(res[i]){
+                    if(one[i] > curr){
+                        printf("%d %d\n", one[i], key-one[i]);
+                        curr = one[i];
+                    }
+                }
+            }
+            printf("\n");
+        }
+        else{
+            printf("OTZ\n\n");
+        }
     }
+    return 0;
 }
