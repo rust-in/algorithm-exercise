@@ -13,7 +13,7 @@ int main()
         scanf("%d%d",&V,&N);
         for(int i=0;i<N;i++){
             scanf("%d%d%d",&v,&w,&c);
-            if(c==233){//ÍêÈ«
+            if(c==233){//å®Œå…¨
                 for(int j=w;j<=V;j++)
                     res[j]=max(res[j],res[j-w]+v);
             } else{
