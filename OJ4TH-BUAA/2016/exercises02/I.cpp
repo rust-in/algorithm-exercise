@@ -3,13 +3,15 @@
 #include <cstring>
 using namespace std;
 
-int nod[505][505];
-
+int nod[205][205];
+int res[205][205];
+int ans[205][205];
 int main()
 {
     int n,m;
     while(~scanf("%d%d",&n,&m)){
-        int res[505][505];
+        memset(res,0,sizeof(res));
+        memset(ans,0,sizeof(ans));
         memset(nod,0,sizeof(nod));
         for(int i=0;i<n;i++)
             for(int j=0;j<m;j++)
@@ -20,6 +22,8 @@ int main()
         for(int i=1;i<n;i++)
             for(int j=1;j<m;j++)
                 res[i][j]=max(res[i-1][j],res[i][j-1])+nod[i][j];
+        node[n-1][m-1]=0;
+
         printf("%d\n",res[n-1][m-1]);
     }
 }
