@@ -1,42 +1,111 @@
-#include <cstdio>
-#include <cstring>
-#include <string>
-#include <set>
+#include<iostream>
+#include<string>
+#include<vector>
+#include<set>
 #include <algorithm>
-#include <iostream>
 using namespace std;
 
-char s1[105];
-char s2[105];
-int L[105][105];
-int len1,len2,len;
+string X;
+string Y;
+int table[10000][10000];
+set<string> setOfLCS;      // set保存所有的LCS
 
-int main() {
-    while(~scanf("%s%s",s1,s2)) {
-        memset(L,0,sizeof(L));
-        len1=strlen(s1);
-        len2=strlen(s2);
-        for(int i=0;i<=len1;i++) {
-            for(int j=0;j<=len2;j++) {
-                if(i==0 || j==0) L[i][j]=0;
-                else if(s1[i-1]==s2[j-1] && s1[i-1]!='#' && s2[j-1]!='#') {
-                    L[i][j]=L[i-1][j-1]+1;
-                }
-                else if((s1[i-1]=='?' && s2[j-1]!='#') || (s1[i-1]!='#' && s2[j-1]=='?')) {
-                    L[i][j]=L[i-1][j-1]+1;
-                }
-                else {
-                    if(L[i-1][j]>L[i][j-1]) {
-                        L[i][j]=L[i-1][j];
-                    }
-                    else {
-                        L[i][j]=L[i][j-1];
-                    }
-                }
-//                printf("ans[%d][%d]=%d\n",i,j,L[i][j]);
-            }
-        }
-        len=L[len1][len2];
-        printf("%d\n",len);
+int max(int a, int b)
+{
+	return (a>b)? a:b;
+}
+
+/**
+ * 字符串逆序
+ */
+string Reverse(string str)
+{
+	int low = 0;
+	int high = str.length() - 1;
+	while (low < high)
+	{
+		char temp = str[low];
+		str[low] = str[high];
+		str[high] = temp;
+		++low;
+		--high;
+	}
+	return str;
+}
+
+/**
+ * 构造表，并返回X和Y的LCS的长度
+ */
+int lcs(int m, int n)
+{
+
+	for(int i=0; i<m+1; ++i)
+	{
+		for(int j=0; j<n+1; ++j)
+		{
+			// 第一行和第一列置0
+			if (i == 0 || j == 0)
+				table[i][j] = 0;
+
+			else if(X[i-1] == Y[j-1] || X[i-1]=='?' || Y[j-1]=='?')
+				table[i][j] = table[i-1][j-1] + 1;
+
+			else
+				table[i][j] = max(table[i-1][j], table[i][j-1]);
+		}
+	}
+
+	return table[m][n];
+}
+
+/**
+ * 求出所有的最长公共子序列，并放入set中
+ */
+void traceBack(int i, int j, string lcs_str)
+{
+	while (i>0 && j>0)
+	{
+		if (X[i-1] == Y[j-1])
+		{
+			lcs_str.push_back(X[i-1]);
+			--i;
+			--j;
+		}
+		else
+		{
+			if (table[i-1][j] > table[i][j-1])
+				--i;
+			else if (table[i-1][j] < table[i][j-1])
+				--j;
+			else   // 相等的情况
+			{
+				traceBack(i-1, j, lcs_str);
+				traceBack(i, j-1, lcs_str);
+				return;
+			}
+		}
+	}
+
+	setOfLCS.insert(Reverse(lcs_str));
+}
+
+
+int main()
+{
+    string one,two;
+    while(cin >> one >> two)
+    {
+        for(int i=0;i<one.length();i++)
+            if(one[i]!='#') X+=one[i];
+        for(int i=0;i<two.length();i++)
+            if(two[i]!='#') Y+=two[i];
+
+        int m = X.length();
+        int n = Y.length();
+        int length = lcs(m, n);
+        cout << length << endl;
+        setOfLCS.clear();
+
+        X.clear();  Y.clear();
     }
 }

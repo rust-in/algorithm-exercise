@@ -19,7 +19,7 @@ void ans(int n){
             flag = true;
             continue;
         }else{
-            if(i==upper){ //越界
+            if(i==upper){ //瓒婄晫
                 if(flag){
                     n-=num[i];
                     printf("%d",num[i]);
@@ -36,7 +36,7 @@ void ans(int n){
                         printf("-");
 
             }
-            else if(n == num[i]) { //相等
+            else if(n == num[i]) { //鐩哥瓑
                 printf("%d\n",num[i]);
                 return;
             } else{
