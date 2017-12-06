@@ -1,45 +1,39 @@
 #include <cstdio>
 #include <algorithm>
-#include <cstring>
+#define max_size 10010
 using namespace std;
+int order[max_size];
 
-int node[105][105];
-int res[105][105];
-int r,c;
+struct node{
+    int start,ending;
+    int id;
+};
 
-const int rodx[]={-1,1,0,0};
-const int rody[]={0,0,1,-1};
+node act[max_size];
 
-int dfs(int a, int b)
+bool cmp(node a,node b)
 {
-    if(res[a][b])   return res[a][b];
-    int ans=0;
-
-    for(int i=0;i<4;i++){
-        int x=a+rodx[i],y=b+rody[i];
-        if(x<0||x>=r||y<0||y>=c)    continue;
-        if(node[x][y]>node[a][b]){
-            int tmp = dfs(x,y);
-            ans=max(ans,tmp);
-        }
-    }
-    res[a][b]=ans+1;
-    return  res[a][b];
-}
+    return a.ending<b.ending;
+};
 
 int main()
 {
-
-    while(~scanf("%d%d",&r,&c)){
-        for(int i=0;i<r;i++)
-            for(int j=0;j<c;j++)
-                scanf("%d",&node[i][j]);
-        int ans=0;
-        for(int i=0;i<r;i++)
-            for(int j=0;j<c;j++){
-                memset(res,0,sizeof(res));
-                ans=max(ans,dfs(i,j));
-            }
-        printf("%d\n",ans);
+    int n;
+    while(~scanf("%d",&n))
+    {
+        for(int i=0;i<n;i++)
+           {
+               scanf("%d%d",&act[i].start,&act[i].ending);
+                act[i].id=i+1;
+           }
+        sort(act,act+n,cmp);
+        order[0]=0;
+        int number=1;
+        for(int i=1;i<n;i++)
+        {
+            if(act[i].start>=act[order[number-1]].ending)
+            order[number++]=i;
+        }
+        printf("%d\n", number);
     }
 }

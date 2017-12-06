@@ -2,7 +2,7 @@
 using namespace std;
 
 /**
-¼òµ¥µÄººÅµËþ¸´Ï°
+æœ€åŸºæœ¬çš„æ±‰è¯ºå¡”
 */
 
 void han(char a,char b,char c, int n)
