@@ -3,9 +3,9 @@
 #define INF 0x3f3f3f3f
 using namespace std;
 struct Node{
-    int to;//ÖÕµã
-    int cap;//ÈİÁ¿
-    int rev;//·´Ïò±ß
+    int to;//ç»ˆç‚¹
+    int cap;//å®¹é‡
+    int rev;//åå‘è¾¹
 };
 
 vector<Node> v[MAX];

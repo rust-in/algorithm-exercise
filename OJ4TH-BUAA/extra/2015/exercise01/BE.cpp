@@ -5,6 +5,10 @@ const int MAX_V=1010;
 const int INF=99999999;
 const double eps = 1e-8;
 
+int v,n;
+int rod[25][25];
+int rec[25];
+
 //用于表示边的结构体（终点、容量、反向边）
 struct edge
 {
@@ -45,6 +49,15 @@ int dfs(int v,int t,int f)
     return 0;
 }
 
+void DFS(int i){
+    if(rec[i]==1)   return;
+    rec[i]=1;
+    for(int j=1;j<=v;j++){
+        if(rod[i][j]>-1)
+            DFS(j);
+    }
+}
+
 //求解从s到t的最大流
 int max_flow(int s,int t)
 {
@@ -61,22 +74,25 @@ int max_flow(int s,int t)
 
 int main()
 {
-    int s,t,c,v,n,T,res;
-    while(scanf("%d%d%d",&v,&n,&T)==3) //v顶点数，n边数,T次查询
+    int s,t,c,T,res;
+    while(~scanf("%d%d",&v,&n))
     {
         for(int i=0;i<MAX_V;i++)
             G[i].clear();
+        memset(rod,-1,sizeof(rod));
+        memset(rec,0,sizeof(rec));
         while(n--)
         {
-            scanf("%d%d%d",&s,&t,&c); //起始、终点、容量
+            scanf("%d%d%d",&s,&t,&c);
+            rod[s][t]=c;
             add_edge(s,t,c);
         }
-        while(T--)
-        {
-            scanf("%d%d",&s,&t);
-            res=max_flow(s,t);
+        res=max_flow(1,v);
+        DFS(1);
+        if(rec[v])
             printf("%d\n",res);
-        }
+        else
+            printf("404 Not Found\n");
     }
     return 0;
 }

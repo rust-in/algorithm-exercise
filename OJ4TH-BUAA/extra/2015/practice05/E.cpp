@@ -62,21 +62,20 @@ int max_flow(int s,int t)
 int main()
 {
     int s,t,c,v,n,T,res;
-    while(scanf("%d%d%d",&v,&n,&T)==3) //v顶点数，n边数,T次查询
+    while(~scanf("%d%d",&v,&n))
     {
         for(int i=0;i<MAX_V;i++)
             G[i].clear();
         while(n--)
         {
-            scanf("%d%d%d",&s,&t,&c); //起始、终点、容量
+            scanf("%d%d%d",&s,&t,&c);
             add_edge(s,t,c);
         }
-        while(T--)
-        {
-            scanf("%d%d",&s,&t);
-            res=max_flow(s,t);
+        res=max_flow(1,v);
+        if(res)
             printf("%d\n",res);
-        }
+        else
+            printf("404 Not Found\n");
     }
     return 0;
 }
