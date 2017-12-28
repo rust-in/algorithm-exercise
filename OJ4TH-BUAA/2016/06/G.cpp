@@ -8,53 +8,38 @@
 #include <queue>
 #include <map>
 using namespace std;
-
-struct pp
+const double eps=1e-8;
+void work()
 {
-    double x;
-    double y;
-};
-
-double dis(pp p1,pp p2){ //����
-    return sqrt((p2.x-p1.x)*(p2.x-p1.x)+(p2.y-p1.y)*(p2.y-p1.y));
+    double r,x1,x2,y1,y2;
+    scanf("%lf%lf%lf%lf%lf",&r,&x1,&y1,&x2,&y2);
+    double d0=sqrt(pow(x1,2)+pow(y1,2));
+    if(fabs(d0)<eps)
+    {
+        printf("%.3lf\n",2*r);
+        return ;
+    }
+    double k=r*r/(d0*d0);//点P'相对于点P的比值
+    double x3=x1*k,x4=x2*k,y3=y1*k,y4=y2*k,ans;//求出来点P'和Q'
+    double mx=(x3+x4)/2,my=(y3+y4)/2;//求出点P'和Q'之间的中间点
+    double d=sqrt(pow(mx,2)+pow(my,2));//求出中间点到原点之间的距离
+    if(d<=r)
+    {
+        double dist=sqrt(pow(x3-x4,2)+pow(y3-y4,2));//P'和Q'之间的距离
+        ans=dist*d0/r;//相似三角形求和
+    }
+    else
+    {
+        double kk=r/d;
+        double smx=mx*kk,smy=my*kk;//得到点D的x和y
+        ans=2*sqrt(pow(smx-x1,2)+pow(smy-y1,2));
+    }
+    printf("%.3lf\n",ans);
 }
-
-double cross(pp p0,pp p1,pp p2){ //���
-    return (p1.x-p0.x)*(p2.y-p0.y)-(p1.y-p0.y)*(p2.x-p0.x);
-}
-
 int main()
 {
-    int len;
-    scanf("%d",&len);
-
-    double radius;
-    pp O;   O.x=0;  O.y=0; //ԭ��
-    pp one,two;
-    while(len--){
-        scanf("%lf",&radius);
-        scanf("%lf%lf%lf%lf",&one.x,&one.y,&two.x,&two.y);
-
-        if(dis(one,O)==0){
-            printf("%.3lf\n",2*radius);
-            continue;
-        }
-
-        double sma_r = dis(one,O);
-
-        pp three, four;
-        three.x = pow(radius,2)/pow(sma_r,2) * one.x; three.y = pow(radius,2)/pow(sma_r,2) * one.y,
-        four.x= pow(radius,2)/pow(sma_r,2) * two.x;   four.y = pow(radius,2)/pow(sma_r,2) * two.y;
-
-        pp fin; fin.x = (three.x + four.x) /2;  fin.y = (three.y+four.y)/2;
-        double flag = dis(fin,O);
-
-        double res;
-        if(flag-radius<=0)
-            res = dis(three,four);
-        else
-            res = 2*sqrt((flag-radius)*(flag-radius)+(fin.x-three.x)*(fin.x-three.x)*(fin.y-three.y)*(fin.y-three.y));
-        printf("%lf\n",res);
-    }
-
+    int T;
+    scanf("%d",&T);
+    while(T--) work();
+    return 0;
 }
