@@ -32,7 +32,7 @@ int main()
         for(int i=1;i<n;i++)
         {
             if(act[i].start>=act[order[number-1]].ending)
-            order[number++]=i;
+                order[number++]=i;
         }
         printf("%d\n", number);
     }

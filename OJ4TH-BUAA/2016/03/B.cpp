@@ -6,9 +6,9 @@
 #include <cmath>
 using namespace std;
 
-int wei[4][505];
-int tab[4][505];
-int rod[4][505];
+int wei[4][505]; //记录停留所需时间
+int tab[4][505]; //记录换边所需时间
+int rod[4][505]; //
 int res[4][505];
 
 int main()

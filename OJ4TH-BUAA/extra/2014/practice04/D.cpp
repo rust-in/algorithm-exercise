@@ -4,15 +4,13 @@
 #include <queue>
 #include <cstring>
 #include <string>
-#define max_size 10010
-
 using namespace std;
-
+#define max_size 10010
 typedef long long LL;
 char c[max_size];
 long long f[max_size];
 
-priority_queue<LL ,vector<LL>,greater<LL> >q;//建立小顶堆；
+priority_queue<LL ,vector<LL>,greater<LL> >q;//寤虹珛灏忛《鍫嗭紱
 long long n,ans;
 int main()
 {
@@ -45,7 +43,7 @@ int main()
             q.pop();
             LL b=q.top();
             q.pop();
-            ans+=(a+b); // 因为编码长度和其在树中的层数相关
+            ans+=(a+b); // 鍥犱负缂栫爜闀垮害鍜屽叾鍦ㄦ爲涓殑灞傛暟鐩稿叧
             q.push(a+b);
         }
         printf("%lld\n",ans);

@@ -3,10 +3,10 @@
 #include <cstring>
 using namespace std;
 
-int wei[3][505];
-int tab[3][505];
-int rod[3][505];
-int res[3][505];
+int wei[3][505]; //记录停留所需时间
+int tab[3][505]; //记录换边所需时间
+int rod[3][505]; //记录最优解
+int res[3][505]; //记录路径
 
 int main()
 {
@@ -24,9 +24,4 @@ int main()
         }
         printf("%d\n",min(res[1][len-1],res[2][len-1]));
     }
-
-//    wei[1][0]=1,wei[2][0]=2; //³õÊ¼
-//    rod[1][0]=1,rod[2][0]=2;
-//    for(int i=1;i<=n;i++)
-
 }

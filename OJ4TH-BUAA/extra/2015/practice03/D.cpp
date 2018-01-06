@@ -15,24 +15,6 @@ int max(int a, int b)
 }
 
 /**
- * 字符串逆序
- */
-string Reverse(string str)
-{
-	int low = 0;
-	int high = str.length() - 1;
-	while (low < high)
-	{
-		char temp = str[low];
-		str[low] = str[high];
-		str[high] = temp;
-		++low;
-		--high;
-	}
-	return str;
-}
-
-/**
  * 构造表，并返回X和Y的LCS的长度
  */
 int lcs(int m, int n)
@@ -55,6 +37,24 @@ int lcs(int m, int n)
 	}
 
 	return table[m][n];
+}
+
+/**
+ * 字符串逆序
+ */
+string Reverse(string str)
+{
+	int low = 0;
+	int high = str.length() - 1;
+	while (low < high)
+	{
+		char temp = str[low];
+		str[low] = str[high];
+		str[high] = temp;
+		++low;
+		--high;
+	}
+	return str;
 }
 
 /**
